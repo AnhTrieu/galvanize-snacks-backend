@@ -1,16 +1,19 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const morgan = require('morgan')
+let express = require('express')
+let app = express()
+let bodyParser = require('body-parser')
+let cors = require('cors')
+let morgan = require('morgan')
 const PORT = process.env.PORT || 3000
-const app = express()
-const snacksRouter = require('./routes/snacks.js')
-const usersRouter = require('./routes/users.js')
-const reviewsRouter = require('.routes/reviews.js')
+
+let snacksRoutes = require('./routes/snacks.js')
+let usersRoutes = require('./routes/users.js')
+let reviewsRoutes = require('.routes/reviews.js')
 
 app.use(morgan('dev'))
 app.use(cors())
 app.use(bodyParser.json())
+
+app.use('/snacks', snacksRoutes)
 
 app.use((err, req, res, next) => {
   let status = err.status
@@ -18,11 +21,11 @@ app.use((err, req, res, next) => {
   next(err)
 })
 
-app.use((req, res, next) => {
-  res.status(404).json({
-    err: 'NOT FOUND!'
-  })
-})
+// app.use((req, res, next) => {
+//   res.status(404).json({
+//     err: 'NOT FOUND!'
+//   })
+// })
 
 
 app.listen(PORT, () => {

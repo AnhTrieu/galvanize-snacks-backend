@@ -2,13 +2,10 @@ const express = require('express');
 const knex = require('../db/knex');
 
 const router = express.Router();
+const snacksController = require('../controllers/snacks.js')
 
-router.get('/snacks', (req, res, next) => {
-  knex('snacks')
-    .then((result) => {
-      res.send(result)
-    })
-    .catch((err) => next(err))
-})
+
+router.get('/', snacksController.getAllSnacks)
+router.get('/:id', snacksController.getOneSnacks)
 
 module.exports = router;
