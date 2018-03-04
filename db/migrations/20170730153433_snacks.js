@@ -1,4 +1,3 @@
-snacks
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('snacks', (table) => {
     table.increments();
@@ -7,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.float('price');
     table.text('img').notNullable().defaultTo('');
     table.boolean('is_perishable').notNullable().defaultTo(false);
+    table.timestamps(true, true);
   });
 };
 
