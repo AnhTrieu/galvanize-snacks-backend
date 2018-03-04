@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "knex": "knex",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed-db": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run"
   },
   "keywords": [],
   "author": "Scott Hurlow <scott.hurlow@galvanize.com>",
